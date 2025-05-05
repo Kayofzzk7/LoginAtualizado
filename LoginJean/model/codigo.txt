@@ -1,0 +1,13 @@
+class Código – Obviamente define a classe.
+
+public static function salvarCodigo($pdo, $email, $codigo) – Método estático para salvar o código no banco de dados.
+
+$stmt = $pdo->prepare("INSERT INTO codigos (email, codigo) VALUES (?, ?)"); – Prepara o SQL para inserir o código na tabela.
+
+return $stmt->execute([$email, $codigo]); – Executa o SQL com os parâmetros fornecidos (e-mail e o código).
+
+public static function verificarCodigo($pdo, $email, $codigo) – Método estático para verificar se o código existe para um e-mail que está registrado no banco.
+
+$stmt = $pdo->prepare("SELECT * FROM codigos WHERE email = ? AND codigo = ?"); – Ele prepara o SQL para selecionar o código associado ao e-mail que for preenchido.
+
+return $stmt->fetch(PDO::FETCH_ASSOC); – Retorna os dados do código encontrado, se houver, como um array associativo.

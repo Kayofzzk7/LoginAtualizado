@@ -1,0 +1,9 @@
+$email = $_POST['username']; – Recupera o email (ou nome de usuário) enviado pelo formulário.
+
+$senha = $_POST['password']; – Recupera a senha enviada pelo formulário.
+
+$usuario = Usuario::buscarPorEmail($pdo, $email); – Busca o usuário no banco de dados pelo email fornecido.
+
+if ($usuario && password_verify($senha, $usuario['senha'])) { – Verifica se o usuário foi encontrado e se a senha está correta, utilizando password_verify para comparar a senha informada com a armazenada no banco.
+
+$_SESSION['usuario'] = $usuario['nome']; – Armazena o nome do usuário na sessão.

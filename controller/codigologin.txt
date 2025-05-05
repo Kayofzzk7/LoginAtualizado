@@ -1,0 +1,13 @@
+
+
+$email = $_POST['email']; – pega o email enviado pelo formulário.
+
+$usuario = Usuario::buscarPorEmail($pdo, $email); – Busca o usuário no banco de dados pelo email fornecido.
+
+if ($usuario) { – Se o usuário for encontrado.
+
+Codigo::salvarCodigo($pdo, $email, $codigo); – Salva o código de verificação no banco de dados vinculado ao email.
+
+$_SESSION['email_recuperacao'] = $email; – Armazena o email na sessão para uso posterior no processo de recuperação.
+
+

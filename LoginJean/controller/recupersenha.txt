@@ -1,0 +1,17 @@
+$usuario = Usuario::buscarPorEmail($pdo, $email); – Busca o usuário no banco de dados pelo email fornecido.
+
+if ($usuario) { – Se o usuário for encontrado.
+
+$codigo = rand(100000, 999999); – Gera um código aleatório de 6 dígitos para recuperação.
+
+Codigo::salvarCodigo($pdo, $email, $codigo); – Salva o código de verificação no banco de dados vinculado ao email.
+
+$_SESSION['email_recuperacao'] = $email; – Armazena o email na sessão para uso nas próximas etapas da recuperação.
+
+$_SESSION['msg'] = "Código enviado para seu e-mail!"; – Define mensagem de sucesso para o usuário.
+
+header('Location: ../view/codigo.php'); – Redireciona o usuário para a página de verificação do código.
+
+} else { – Caso o usuário não seja encontrado no banco.
+
+$_SESSION['msg'] = "E-mail não cadastrado!"; – Define mensagem de erro caso o email não estiver cadastrado.

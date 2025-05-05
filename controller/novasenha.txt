@@ -1,0 +1,18 @@
+$email = $_SESSION['email_recuperacao'] ?? null; – pega o e-mail da sessão (caso exista), ou null se não estiver definido.
+
+$novaSenha = $_POST['nova_senha']; – Recebe a nova senha enviada pelo formulário.
+
+$confirmarSenha = $_POST['confirmar_senha']; – Recebe a confirmação da nova senha enviada pelo formulário.
+
+if (!$email) { – Verifica se o email não está disponível na sessão (sessão expirada ou acesso indevido).
+
+if ($novaSenha !== $confirmarSenha) { – Verifica se as senhas digitadas são diferentes.
+
+if (Usuario::alterarSenha($pdo, $email, $novaSenha)) { – Tenta alterar a senha no banco de dados usando o método da classe Usuario.
+
+unset($_SESSION['email_recuperacao']); – Remove o email da sessão após o sucesso.
+
+} else { – Caso a alteração da senha de erro.
+
+
+

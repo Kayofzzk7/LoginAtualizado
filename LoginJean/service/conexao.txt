@@ -1,0 +1,20 @@
+class UsePDO - ele define a classe UsePDO para gerenciar a conexão com o banco de dados 
+
+private $conn;- ele define uma propriedade privada para armanezar o a conexão do banco 
+
+public function __construct() - ele constrói uma classe para estabelecer a conexão do banco de dados 
+
+try {  
+$this->conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password); - tenta estabelecer a conexão com o banco de dados usando a tag PDO
+
+$this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+ } catch (PDOException $e) { - define o mode de erro do PDO para exeçoes , permitindo o tratamento dos erros 
+
+die("Erro de conexão: " . $e->getMessage()); - em caso de erro da conexão , vai exibir a mensagem de erro 
+
+ public function getConnection()
+ return $this->conn; - um método publico para retornar toda a conexão com o banco de dados
+
+$db = new UsePDO(); - ele cria uma  instancia de classe 
+
+$pdo = $db->getConnection(); - ele obtem a conexão com o banco de dados 

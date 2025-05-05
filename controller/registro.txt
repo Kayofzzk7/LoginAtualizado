@@ -1,0 +1,33 @@
+$nome = $_POST['fullName']; – pega o nome enviado pelo formulário de registro.
+
+$email = $_POST['yourEmail']; – pega o email enviado pelo formulário de registro.
+
+$dataNascimento = $_POST['data_nascimento']; – pega a data de nascimento enviada pelo formulário de registro.
+
+$senha = $_POST['password']; – pega a senha enviada pelo formulário de registro.
+
+$confirmarSenha = $_POST['confirmPassword']; – pega a confirmação de senha enviada pelo formulário de registro.
+
+if ($senha !== $confirmarSenha) { – Verifica se as senhas são iguais.
+
+$_SESSION['msg'] = "As senhas não estão iguais!"; – Define mensagem de erro caso as senhas não estiver igual.
+
+header('Location: ../view/registro.php'); – manda de volta para a página de registro.
+
+exit(); – Encerra o script após o redirecionamento.
+
+if (Usuario::cadastrar($pdo, $nome, $email, $dataNascimento, $senha)) { – Tenta cadastrar o usuário no banco de dados.
+
+$_SESSION['msg'] = "Registro feito com sucesso!"; – Define mensagem de sucesso e manda para a tela de login.
+
+header('Location: ../view/login.php'); – manda para a página de login.
+
+exit(); – Encerra o script após o redirecionamento.
+
+} else { – Caso o cadastro falhe.
+
+$_SESSION['msg'] = "Erro ao registrar usuário."; – Define mensagem de erro caso o cadastro der errado.
+
+header('Location: ../view/registro.php'); – Redireciona de volta para a página de registro.
+
+exit(); – Encerra o script após o redirecionamento.
